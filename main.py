@@ -1,3 +1,3 @@
-import questions as q
+from quiz import quiz
 
-q.view_question_list()
+quiz()
