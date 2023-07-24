@@ -1,3 +1,7 @@
+# Questions and Answers are stored in this dictionary
+# The branching in this dictionary works as so:
+# Master dictionary -> branching dictionaries containing questions and answers -> Question and Answer
+# This is temporary though, since a tree system might be better for this purpose
 questions = {
   "question_1": {
     "question": "What is 1 + 1",
@@ -11,8 +15,14 @@ questions = {
 
 
 def retrieve_question_and_answer(question_number: int):
+  # Use the Guard pattern to check if the provided integer has a corresponding question
+  if question_number > len(questions) + 1 or question_number < 1:
+    raise ValueError(f"Error: No 'Question {question_number}' can be found")
+
+  # Retrieve question and answer from dictionary
   question = questions[f"question_{question_number}"]
 
+  # Separate question and answer from origin dictionary
   answer = question["answer"]
   question = question["question"]
   return question, answer
