@@ -1,3 +1,3 @@
-from quiz import quiz
+from tree import test
 
-quiz()
+test()
