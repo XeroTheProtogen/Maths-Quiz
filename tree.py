@@ -1,31 +1,33 @@
 
 class Node:
-  def __init__(self, n, data):
+  """This 'Node' class implements the N-nary tree system,
+    which will be used as an cleaner alternative to a Dictionary
+    branch system."""
+  """The N-nary tree is a data structure which stores data in a 'tree' of node
+    which is divided into layers, with the first layer containing a 'root' node."""
+    
+  def __init__(self, n: int, data):
+    #The information stored in the node
     self.data = data
+    #Dynamic Array storing child nodes
     self.children=[None]*n
 
-def inorder(node: Node):
-  if node == None:
-    return
+  def getLength(self) -> int:
+    #How many children does this node have
+    return len(self.children)
 
-  total = len(node.children)
+  def getCapacity(self) -> int:
+    return self.n
 
-  for i in range(total-1):
-    inorder(node.children[i])
+def addQuestion(parent: Node, question, answer) -> Node:
+  if parent.getCapacity() == 0:
+    raise ValueError("Node must have capacity")
+  
+  l = parent.getLength()
+  
+  parent.children[l] = Node(2, f"Question {l + 1}")
 
-  print(node.data, end=" ")
+  parent.children[l].children[0] = Node(0, question)
+  parent.children[l].children[1] = Node(0, answer)
 
-  inorder(node.children[total-1])
-
-def test():
-  n = 3
-  root = Node(n, 1)
-  root.children[0] = Node(n, 2)
-  root.children[1] = Node(n, 3)
-  root.children[2] = Node(n, 4)
-  root.children[0].children[0] = Node(n, 5)
-  root.children[0].children[1] = Node(n, 6)
-  root.children[0].children[2] = Node(n, 7)
-
-  inorder(root)
-
+  return parent
